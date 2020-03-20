@@ -14,6 +14,12 @@ Accompanying with build-in data flows for common protocols and other tools and u
 
 Since libnekit is still in its early stage, many things tend to change. There will be minor API changes (even incompatible) in the coming period. But the architecture of it should remain unchanged.
 
+---- forker add :
+
+https://travis-ci.com/github/CocodingLee/libnekit/builds/154196710
+
+----
+
 Things supported now:
 
 * Data flow chain to transform and analyze data with composition
