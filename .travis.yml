@@ -15,6 +15,14 @@ env:
     - CONAN_REMOTES: "https://api.bintray.com/conan/bincrafters/public-conan,https://api.bintray.com/conan/zhuhaow/libnekit"
     - CONAN_BUILD_POLICY: "missing"
     - CONAN_DOCKER_32_IMAGES: "1"
+    
+linux: &linux
+   os: linux
+   sudo: required
+   language: python
+   python: "3.6"
+   services:
+     - docker
 
 osx: &osx
    os: osx
@@ -24,106 +32,19 @@ ios_default: &ios
   os: osx
   language: objective-c
 
-linux: &linux
-   os: linux
-   sudo: required
-   language: python
-   python: "3.6"
-   services:
-     - docker
 
 matrix:
   include:
     - <<: *linux
-      env: CONAN_GCC_VERSIONS=5 CONAN_DOCKER_IMAGE=lasote/conangcc5 CONAN_BUILD=1 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=5 CONAN_DOCKER_IMAGE=lasote/conangcc5 CONAN_BUILD=1 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=5 CONAN_DOCKER_IMAGE=lasote/conangcc5 CONAN_BUILD=1 CONAN_CURRENT_PAGE=3 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=5 CONAN_DOCKER_IMAGE=lasote/conangcc5 CONAN_BUILD=1 CONAN_CURRENT_PAGE=4 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=6 CONAN_DOCKER_IMAGE=lasote/conangcc6 CONAN_BUILD=1 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=6 CONAN_DOCKER_IMAGE=lasote/conangcc6 CONAN_BUILD=1 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=6 CONAN_DOCKER_IMAGE=lasote/conangcc6 CONAN_BUILD=1 CONAN_CURRENT_PAGE=3 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=6 CONAN_DOCKER_IMAGE=lasote/conangcc6 CONAN_BUILD=1 CONAN_CURRENT_PAGE=4 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7 CONAN_BUILD=1 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7 CONAN_BUILD=1 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7 CONAN_BUILD=1 CONAN_CURRENT_PAGE=3 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7 CONAN_BUILD=1 CONAN_CURRENT_PAGE=4 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=lasote/conangcc8 CONAN_BUILD=1 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=lasote/conangcc8 CONAN_BUILD=1 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=lasote/conangcc8 CONAN_BUILD=1 CONAN_CURRENT_PAGE=3 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=lasote/conangcc8 CONAN_BUILD=1 CONAN_CURRENT_PAGE=4 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=lasote/conanclang39 CONAN_BUILD=1 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=lasote/conanclang39 CONAN_BUILD=1 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=lasote/conanclang39 CONAN_BUILD=1 CONAN_CURRENT_PAGE=3 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=lasote/conanclang39 CONAN_BUILD=1 CONAN_CURRENT_PAGE=4 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40 CONAN_BUILD=1 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40 CONAN_BUILD=1 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40 CONAN_BUILD=1 CONAN_CURRENT_PAGE=3 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40 CONAN_BUILD=1 CONAN_CURRENT_PAGE=4 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=5.0 CONAN_DOCKER_IMAGE=lasote/conanclang50 CONAN_BUILD=1 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=5.0 CONAN_DOCKER_IMAGE=lasote/conanclang50 CONAN_BUILD=1 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=5.0 CONAN_DOCKER_IMAGE=lasote/conanclang50 CONAN_BUILD=1 CONAN_CURRENT_PAGE=3 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=5.0 CONAN_DOCKER_IMAGE=lasote/conanclang50 CONAN_BUILD=1 CONAN_CURRENT_PAGE=4 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=lasote/conanclang60 CONAN_BUILD=1 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=lasote/conanclang60 CONAN_BUILD=1 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=4
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=lasote/conanclang60 CONAN_BUILD=1 CONAN_CURRENT_PAGE=3 CONAN_TOTAL_PAGES=4
-    - <<: *linux
       env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=lasote/conanclang60 CONAN_BUILD=1 CONAN_CURRENT_PAGE=4 CONAN_TOTAL_PAGES=4
-      
-    - <<: *osx
-      osx_image: xcode8.3
-      env: CONAN_APPLE_CLANG_VERSIONS=8.1 CONAN_BUILD=1
-    - <<: *osx
-      osx_image: xcode9
-      env: CONAN_APPLE_CLANG_VERSIONS=9.0 CONAN_BUILD=1
-    - <<: *osx
-      osx_image: xcode9.3
-      env: CONAN_APPLE_CLANG_VERSIONS=9.1 CONAN_BUILD=1
+
     - <<: *osx
       osx_image: xcode10
       env: CONAN_APPLE_CLANG_VERSIONS=10.0 CONAN_BUILD=1
 
     - <<: *ios
-      osx_image: xcode8.3
-      env: CONAN_APPLE_CLANG_VERSIONS=8.1 CONAN_BUILD=1 CONAN_BASE_PROFILE="ios" CONAN_RUN_TESTS=0 CONAN_ARCHS="armv7"
-    - <<: *ios
-      osx_image: xcode9
-      env: CONAN_APPLE_CLANG_VERSIONS=9.0 CONAN_BUILD=1 CONAN_BASE_PROFILE="ios" CONAN_RUN_TESTS=0 CONAN_ARCHS="armv7"
-    - <<: *ios
-      osx_image: xcode9.3
-      env: CONAN_APPLE_CLANG_VERSIONS=9.1 CONAN_BUILD=1 CONAN_BASE_PROFILE="ios" CONAN_RUN_TESTS=0 CONAN_ARCHS="armv7"
-    - <<: *ios
       osx_image: xcode10
-      env: CONAN_APPLE_CLANG_VERSIONS=10.0 CONAN_BUILD=1 CONAN_BASE_PROFILE="ios" CONAN_RUN_TESTS=0 CONAN_ARCHS="armv7"
+      env: CONAN_APPLE_CLANG_VERSIONS=10.0 CONAN_BUILD=1 CONAN_BASE_PROFILE="ios" CONAN_RUN_TESTS=0 CONAN_ARCHS="armv7,armv7s,arm64,i386,x86_64"
 
     - os: linux
       language: cpp
