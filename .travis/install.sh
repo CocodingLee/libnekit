@@ -15,7 +15,7 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
 
     CFLAGS="-I$(brew --prefix openssl)/include" \
     LDFLAGS="-L$(brew --prefix openssl)/lib" \
-    pyenv install -v 3.7.0
+    pyenv install -sv 3.7.0
     pyenv virtualenv -f 3.7.0 conan
     pyenv rehash
     pyenv activate conan
