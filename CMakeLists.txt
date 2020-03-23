@@ -18,7 +18,8 @@ set(CMAKE_C_VISIBILITY_PRESET hidden)
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
 
-set(CMAKE_OSX_DEPLOYMENT_TARGET "10.9" CACHE STRING "" FORCE)
+# use libc++
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -stdlib=libc++")
 
 cmake_policy(SET CMP0063 NEW)
 add_library(nekit "")
@@ -41,13 +42,6 @@ if (NOT WIN32)
 
   check_cxx_compiler_flag(-Wno-pragma-once-outside-header HAS_PRAGMA_ONCE_WARNING)
   target_compile_options(nekit PRIVATE $<$<BOOL:${HAS_PRAGMA_ONCE_WARNING}>:-Wno-pragma-once-outside-header>)
-endif()
-
-if(APPLE)
-  # since we use a deployment target of 10.8, the non-C++11-compliant libstdc++ is chosen by default; we need C++11
-  # see issue #302 for more details
-  target_compile_options(cpp-multithread PRIVATE --stdlib=libc++)
-  target_link_libraries(cpp-multithread --stdlib=libc++)
 endif()
 
 option(COVERAGE "Generate coverage report" OFF)
