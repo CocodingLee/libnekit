@@ -19,7 +19,8 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
 
 # use libc++
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -stdlib=libc++")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${EXTRA_SANITIZE_OPTIONS}")
+set(CMAKE_CXX_FLAGS "-std=c++14 -stdlib=libc++ -fno-rtti")
 
 cmake_policy(SET CMP0063 NEW)
 add_library(nekit "")
@@ -43,6 +44,23 @@ if (NOT WIN32)
   check_cxx_compiler_flag(-Wno-pragma-once-outside-header HAS_PRAGMA_ONCE_WARNING)
   target_compile_options(nekit PRIVATE $<$<BOOL:${HAS_PRAGMA_ONCE_WARNING}>:-Wno-pragma-once-outside-header>)
 endif()
+
+# ios target definition
+if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
+    if (CMAKE_TARGET_SYSTEM STREQUAL "ios")
+        set(IOS_DEPLOYMENT_TARGET "9.0")
+        if ((CMAKE_OSX_ARCHITECTURES STREQUAL "armv7") OR (CMAKE_OSX_ARCHITECTURES STREQUAL "armv7s") OR (CMAKE_OSX_ARCHITECTURES STREQUAL "arm64"))
+            set(XCODE_IOS_PLATFORM "iphoneos")
+        else ()
+           set(XCODE_IOS_PLATFORM "iphonesimulator")
+        endif ()
+        set(XCODE_IOS_PLATFORM_VERSION_FLAG "-m${XCODE_IOS_PLATFORM}-version-min=${IOS_DEPLOYMENT_TARGET}")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${XCODE_IOS_PLATFORM_VERSION_FLAG}")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${XCODE_IOS_PLATFORM_VERSION_FLAG}")
+    elseif (CMAKE_TARGET_SYSTEM STREQUAL "mac")
+        set(CMAKE_OSX_DEPLOYMENT_TARGET "10.9")
+    endif ()
+endif ()
 
 option(COVERAGE "Generate coverage report" OFF)
 if(COVERAGE)
