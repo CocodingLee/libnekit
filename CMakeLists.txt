@@ -41,6 +41,13 @@ if (NOT WIN32)
   target_compile_options(nekit PRIVATE $<$<BOOL:${HAS_PRAGMA_ONCE_WARNING}>:-Wno-pragma-once-outside-header>)
 endif()
 
+if(APPLE)
+  # since we use a deployment target of 10.8, the non-C++11-compliant libstdc++ is chosen by default; we need C++11
+  # see issue #302 for more details
+  target_compile_options(cpp-multithread PRIVATE --stdlib=libc++)
+  target_link_libraries(cpp-multithread --stdlib=libc++)
+endif()
+
 option(COVERAGE "Generate coverage report" OFF)
 if(COVERAGE)
   target_compile_options(nekit PRIVATE -g -O0 -coverage)
