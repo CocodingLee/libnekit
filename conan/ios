@@ -3,7 +3,7 @@ include(default)
 [settings]
 os=iOS
 os.version=9.0
-arch=armv7
+arch=armv7,armv7s,arm64,i386,x86_64
 
 [build_requires]
 darwin-toolchain/1.0@theodelrieu/stable

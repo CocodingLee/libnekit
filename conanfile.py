@@ -14,7 +14,7 @@ class LibnekitConan(ConanFile):
 
     def requirements(self):
         self.requires("OpenSSL/1.1.0g@conan/stable")
-        self.requires("libsodium/1.0.16@bincrafters/stable")
+        self.requires("libsodium/1.0.18@bincrafters/stable")
         self.requires("libmaxminddb/1.3.2@zhuhaow/stable")
         self.requires("boost/1.68.0@libnekit/stable")
 
