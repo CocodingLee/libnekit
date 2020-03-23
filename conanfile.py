@@ -13,13 +13,10 @@ class LibnekitConan(ConanFile):
     scm = {"type": "git", "subfolder": "libnekit", "url": "auto", "revision": "auto"}
 
     def requirements(self):
-        self.requires("OpenSSL/1.1.0g@conan/stable")
-
-        self.requires("libsodium/1.0.16@bincrafters/stable")
-
-        self.requires("libmaxminddb/1.3.2@zhuhaow/stable")
-
-        self.requires("boost/1.68.0@libnekit/stable")
+        self.build_requires("OpenSSL/1.1.0g@conan/stable")
+        self.build_requires("libsodium/1.0.16@bincrafters/stable")
+        self.build_requires("libmaxminddb/1.3.2@zhuhaow/stable")
+        self.build_requires("boost/1.68.0@libnekit/stable")
 
         exclude_module = [
             "math",
@@ -53,7 +50,7 @@ class LibnekitConan(ConanFile):
             self.options["boost"].add_option("without_%s" % m, True)
 
         if tools.get_env("CONAN_RUN_TESTS", True):
-            self.requires("gtest/1.8.1@bincrafters/stable")
+            self.build_requires("gtest/1.8.1@bincrafters/stable")
 
 
     def _cmake(self):
