@@ -16,13 +16,6 @@ env:
     - CONAN_BUILD_POLICY: "missing"
     - CONAN_DOCKER_32_IMAGES: "1"
     
-linux: &linux
-   os: linux
-   sudo: required
-   language: python
-   python: "3.6"
-   services:
-     - docker
 
 osx: &osx
    os: osx
@@ -35,9 +28,6 @@ ios_default: &ios
 
 matrix:
   include:
-    - <<: *linux
-      env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=lasote/conanclang60 CONAN_BUILD=1 CONAN_CURRENT_PAGE=4 CONAN_TOTAL_PAGES=4
-
     - <<: *osx
       osx_image: xcode10
       env: CONAN_APPLE_CLANG_VERSIONS=10.0 CONAN_BUILD=1
@@ -45,10 +35,6 @@ matrix:
     - <<: *ios
       osx_image: xcode10
       env: CONAN_APPLE_CLANG_VERSIONS=10.0 CONAN_BUILD=1 CONAN_BASE_PROFILE="ios" CONAN_RUN_TESTS=0 CONAN_ARCHS="armv7,armv7s,arm64,i386,x86_64"
-
-    - os: linux
-      language: cpp
-      env: GCC_VERSION=7 MATRIX_EVAL="CC=gcc-${GCC_VERSION} && CXX=g++-${GCC_VERSION}" COMPILE_PREFIX="build-wrapper-linux-x86-64 --out-dir bw-output" CONAN_CONFIG="-s cppstd=14 -s compiler.libcxx=libstdc++11 --build=gtest --build=missing" CONAN_CPU_COUNT=4
 
       addons:
         coverity_scan:
